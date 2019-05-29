@@ -20,13 +20,31 @@ class Employee:
     @classmethod
     def set_raise(cls, amount):
         cls.raise_amount = amount
+    
+    @classmethod
+    def from_string(cls, emp_string):
+        first, last, pay = emp_string.split('-')
+        return cls(first, last, pay)
+    
+    @staticmethod
+    def is_workday(day):
+        if day.weekday() == 5 or day.weekday() == 6:
+            return False
+        return True
 
 
-emp_1 = Employee(first='Leslie', last='Alldridge', pay=123)
+emp_str_1 = 'Leslie-Alldridge-2042'
+
+emp_1 = Employee.from_string(emp_str_1)
 emp_2 = Employee(first='Leslie2', last='Alldridge2', pay=2)
 
 Employee.set_raise(1.05)
 
-print(Employee.raise_amount)
-print(emp_1.raise_amount)
+#print(Employee.raise_amount)
+print(emp_1.email)
 print(emp_2.raise_amount)
+
+import datetime
+my_date = datetime.date(2016, 7, 11)
+
+print(Employee.is_workday(my_date))
