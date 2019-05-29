@@ -77,3 +77,5 @@ mgr_1.remove_emp(dev_1)
 
 print(mgr_1.email)
 mgr_1.print_emps()
+
+print(issubclass(Developer, Employee))
