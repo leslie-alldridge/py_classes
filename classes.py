@@ -44,10 +44,36 @@ class Developer(Employee):
         self.prog_lang = prog_lang
 
 
+class Manager(Employee):
+
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_emps(self):
+        for emp in self.employees:
+            print('--> ' + emp.fullname())
+
+
+dev_1 = Developer(first='Leslie1', last='Alldridge1',
+                  pay=22, prog_lang="JavaScript")
 dev_2 = Developer(first='Leslie2', last='Alldridge2', pay=20, prog_lang="Java")
 
-dev_2.apply_raise()
 
-# print(Employee.raise_amount)
-print(dev_2.prog_lang)
-print(dev_2.raise_amount)
+mgr_1 = Manager('Sue', 'Smith', 9000, [dev_1])
+mgr_1.add_emp(dev_2)
+mgr_1.remove_emp(dev_1)
+
+print(mgr_1.email)
+mgr_1.print_emps()
