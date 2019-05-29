@@ -27,6 +27,12 @@ class Employee:
         self.first = first
         self.last = last
 
+    @fullname.deleter
+    def fullname(self):
+        print('Delete Name')
+        self.first = None
+        self.last = None
+
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
@@ -111,4 +117,7 @@ emp_2 = Employee('test', 'test2', 90)
 # print(len(emp_1))
 emp_1.fullname = 'Leslie Alldridge'
 print(emp_1.email)
+print(emp_1.fullname)
+
+del emp_1.fullname
 print(emp_1.fullname)
