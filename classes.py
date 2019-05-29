@@ -10,12 +10,22 @@ class Employee:
         self.first = first
         self.last = last
         self.pay = pay
-        self.email = first + '.' + last + '@company.com'
 
         Employee.num_of_emps += 1
 
+    @property
+    def email(self):
+        return '{}.{}@email.com'.format(self.first, self.last)
+
+    @property
     def fullname(self):
         return '{} {}'.format(self.first, self.last)
+
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
@@ -24,13 +34,13 @@ class Employee:
         return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
 
     def __str__(self):
-        return '{} - {}'.format(self.fullname(), self.email)
+        return '{} - {}'.format(self.fullname, self.email)
 
     def __add__(self, other):
         return self.pay + other.pay
 
     def __len__(self):
-        return len(self.fullname())
+        return len(self.fullname)
 
     @classmethod
     def set_raise(cls, amount):
@@ -78,24 +88,27 @@ class Manager(Employee):
             print('--> ' + emp.fullname())
 
 
-dev_1 = Developer(first='Leslie1', last='Alldridge1',
-                  pay=22, prog_lang="JavaScript")
-dev_2 = Developer(first='Leslie2', last='Alldridge2', pay=20, prog_lang="Java")
+# dev_1 = Developer(first='Leslie1', last='Alldridge1',
+#                   pay=22, prog_lang="JavaScript")
+# dev_2 = Developer(first='Leslie2', last='Alldridge2', pay=20, prog_lang="Java")
 
 
-mgr_1 = Manager('Sue', 'Smith', 9000, [dev_1])
-mgr_1.add_emp(dev_2)
-mgr_1.remove_emp(dev_1)
+# mgr_1 = Manager('Sue', 'Smith', 9000, [dev_1])
+# mgr_1.add_emp(dev_2)
+# mgr_1.remove_emp(dev_1)
 
-print(mgr_1.email)
-mgr_1.print_emps()
+# print(mgr_1.email)
+# mgr_1.print_emps()
 
-print(issubclass(Developer, Employee))
+# print(issubclass(Developer, Employee))
 
 emp_1 = Employee('test', 'test2', 90)
 emp_2 = Employee('test', 'test2', 90)
 
-print(str(emp_1))
-print(repr(emp_1))
-print(emp_1 + emp_2)
-print(len(emp_1))
+# print(str(emp_1))
+# print(repr(emp_1))
+# print(emp_1 + emp_2)
+# print(len(emp_1))
+emp_1.fullname = 'Leslie Alldridge'
+print(emp_1.email)
+print(emp_1.fullname)
